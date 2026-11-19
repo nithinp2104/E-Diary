@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { AppButton, AppCard, AppHeader, AppText, ErrorMessage, ScreenContainer } from '@/components/ui';
+import { AppButton, AppCard, AppText, CheckItem, ErrorMessage, HeroScreen } from '@/components/ui';
 import { useAuth } from '@/features/auth';
 import { toApiError } from '@/lib/api/errors';
 import { colors, radius, sizes, spacing } from '@/theme';
@@ -37,12 +37,9 @@ export default function SubscriptionScreen() {
   };
 
   return (
-    <ScreenContainer>
-      <AppHeader
-        title={isExpired ? 'Subscription expired' : 'Subscription required'}
-        subtitle={isExpired ? 'Renew access to continue' : 'Active access is needed to continue'}
-      />
-
+    <HeroScreen
+      title={isExpired ? 'Subscription expired' : 'Subscription required'}
+      subtitle={isExpired ? 'Renew access to continue' : 'Active access is needed to continue'}>
       <AppCard style={styles.center}>
         <View style={styles.statusIcon}>
           <AppText variant="title" color="primary">
@@ -64,9 +61,7 @@ export default function SubscriptionScreen() {
           E-Diary access · 30 days
         </AppText>
         {BENEFITS.map((benefit) => (
-          <AppText key={benefit} variant="small" color="textSecondary">
-            ✓ {benefit}
-          </AppText>
+          <CheckItem key={benefit} label={benefit} />
         ))}
         <ErrorMessage tone="info" message="Online subscription and renewal are not available in the app yet." />
       </AppCard>
@@ -80,7 +75,7 @@ export default function SubscriptionScreen() {
           Your saved account and profile will remain.
         </AppText>
       </View>
-    </ScreenContainer>
+    </HeroScreen>
   );
 }
 

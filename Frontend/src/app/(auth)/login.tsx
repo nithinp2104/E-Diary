@@ -2,16 +2,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useRef, useState } from 'react';
 import { StyleSheet, View, type TextInputInstance } from 'react-native';
 
-import {
-  AppButton,
-  AppCard,
-  AppHeader,
-  AppInput,
-  AppText,
-  BrandMark,
-  ErrorMessage,
-  ScreenContainer,
-} from '@/components/ui';
+import { AppButton, AppCard, AppInput, AppText, ErrorMessage, HeroScreen } from '@/components/ui';
 import { useAuth, useLoginForm } from '@/features/auth';
 import { spacing } from '@/theme';
 
@@ -34,11 +25,8 @@ export default function LoginScreen() {
   };
 
   return (
-    <ScreenContainer>
-      <AppHeader title="Welcome back" subtitle="Sign in to open your E-Diary" />
-
+    <HeroScreen title="Welcome back" subtitle="Sign in to open your E-Diary">
       <AppCard>
-        <BrandMark />
         <View style={styles.intro}>
           <AppText variant="heading">Good to see you</AppText>
           <AppText variant="small" color="textSecondary">
@@ -61,7 +49,7 @@ export default function LoginScreen() {
 
         <AppInput
           label="Email address"
-          placeholder="employee@organization.gov.in"
+          placeholder="name@gmail.com"
           value={values.email}
           onChangeText={(text) => setField('email', text)}
           error={fieldErrors.email}
@@ -114,7 +102,7 @@ export default function LoginScreen() {
           disabled={isSubmitting}
         />
       </View>
-    </ScreenContainer>
+    </HeroScreen>
   );
 }
 

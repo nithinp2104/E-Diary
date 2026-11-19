@@ -100,11 +100,12 @@ const styles = StyleSheet.create({
     borderRadius: radius.md,
     borderWidth: sizes.borderWidth,
     borderColor: colors.border,
-    backgroundColor: colors.surface,
+    backgroundColor: colors.surfaceMuted,
   },
   fieldFocused: {
     borderColor: colors.primary,
     borderWidth: sizes.borderWidthFocus,
+    backgroundColor: colors.surface,
   },
   fieldError: {
     borderColor: colors.danger,

@@ -2,7 +2,7 @@ import { Text, type TextProps } from 'react-native';
 
 import { colors, typography, type TypographyVariant } from '@/theme';
 
-type TextColor = 'text' | 'textSecondary' | 'textMuted' | 'primary' | 'onPrimary' | 'danger' | 'success';
+type TextColor = 'text' | 'textSecondary' | 'textMuted' | 'primary' | 'onPrimary' | 'onPrimaryMuted' | 'danger' | 'success';
 
 export interface AppTextProps extends TextProps {
   variant?: TypographyVariant;

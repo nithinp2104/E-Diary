@@ -1,4 +1,4 @@
-import { DefaultTheme, Stack, ThemeProvider } from 'expo-router';
+import { DefaultTheme, Stack, ThemeProvider, usePathname } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
@@ -23,7 +23,7 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={navigationTheme}>
       <AuthProvider>
-        <StatusBar style="dark" />
+        <StatusBar style="light" />
         <RootNavigator />
       </AuthProvider>
     </ThemeProvider>
@@ -44,10 +44,12 @@ function RootNavigator() {
   const isInitializing = status === 'initializing';
   const isAuthenticated = status === 'authenticated';
   const hasAccess = isAuthenticated && subscriptionStatus === 'active';
+  // The landing route renders its own welcome/loading UI while the session is restored.
+  const isLanding = usePathname() === '/';
 
   useEffect(() => {
-    if (!isInitializing) void SplashScreen.hideAsync();
-  }, [isInitializing]);
+    if (!isInitializing || isLanding) void SplashScreen.hideAsync();
+  }, [isInitializing, isLanding]);
 
   return (
     <>
@@ -64,7 +66,7 @@ function RootNavigator() {
         </Stack.Protected>
       </Stack>
       {/* Covers the auth screens while a stored session is restored (no flash of login). */}
-      {isInitializing && <LoadingIndicator fullScreen />}
+      {isInitializing && !isLanding && <LoadingIndicator fullScreen />}
     </>
   );
 }

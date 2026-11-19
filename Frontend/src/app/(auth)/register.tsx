@@ -2,16 +2,7 @@ import { router } from 'expo-router';
 import { useRef } from 'react';
 import { StyleSheet, View, type TextInputInstance } from 'react-native';
 
-import {
-  AppButton,
-  AppCard,
-  AppHeader,
-  AppInput,
-  AppText,
-  BrandMark,
-  ErrorMessage,
-  ScreenContainer,
-} from '@/components/ui';
+import { AppButton, AppCard, AppInput, AppText, ErrorMessage, HeroScreen } from '@/components/ui';
 import { useRegisterForm } from '@/features/auth';
 import { AUTH_LIMITS } from '@/features/auth/constants';
 import { spacing } from '@/theme';
@@ -28,23 +19,19 @@ export default function RegisterScreen() {
   const handleSubmit = () => void submit();
 
   return (
-    <ScreenContainer>
-      <AppHeader title="Create your account" subtitle="STEP 1 OF 3 · Set up your employee account" />
-
+    <HeroScreen
+      title="Create your account"
+      subtitle="Set up your employee account"
+      step={{ current: 3, total: 3 }}>
       <AppCard>
-        <BrandMark trailing="1 / 3" />
         <View style={styles.intro}>
-          <AppText variant="heading">Welcome to E-Diary</AppText>
-          <AppText variant="small" color="textSecondary">
-            Create your account to access your organization&apos;s digital diary.
-          </AppText>
         </View>
 
         <ErrorMessage message={formError} />
 
         <AppInput
-          label="Full name"
-          placeholder="Enter your full name"
+          label="Full Name"
+          placeholder="Enter your full Name"
           value={values.name}
           onChangeText={(text) => setField('name', text)}
           error={fieldErrors.name}
@@ -60,8 +47,8 @@ export default function RegisterScreen() {
 
         <AppInput
           ref={emailRef}
-          label="Work email"
-          placeholder="name@organization.gov.in"
+          label="Email Address"
+          placeholder="name@gmail.com"
           value={values.email}
           onChangeText={(text) => setField('email', text)}
           error={fieldErrors.email}
@@ -122,7 +109,7 @@ export default function RegisterScreen() {
         </AppText>
         <AppButton variant="link" title="Login" onPress={() => router.replace('/login')} disabled={isSubmitting} />
       </View>
-    </ScreenContainer>
+    </HeroScreen>
   );
 }
 

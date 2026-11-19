@@ -34,6 +34,18 @@ export const colors = {
   warning: '#B45309',
   warningSoft: '#FFFBEB',
 
+  /** Welcome (splash) screen and brand logo. */
+  splashBackground: '#0B1F4D',
+  brandRing: '#1DA9E1',
+  brandBolt: '#EE1C25',
+
+  /** Blue header band shared by every screen. */
+  hero: '#1E40AF',
+  heroDeep: '#172F80',
+  heroDecor: 'rgba(255, 255, 255, 0.07)',
+  onPrimaryMuted: '#BFDBFE',
+  backdrop: 'rgba(11, 31, 77, 0.6)',
+
   disabled: '#CBD5E1',
   overlay: 'rgba(242, 245, 250, 0.96)',
 } as const;
@@ -45,6 +57,8 @@ export const fontSizes = {
   lg: 18,
   xl: 22,
   xxl: 28,
+  hero: 30,
+  price: 48,
 } as const;
 
 export const lineHeights = {
@@ -54,6 +68,8 @@ export const lineHeights = {
   lg: 26,
   xl: 30,
   xxl: 36,
+  hero: 38,
+  price: 56,
 } as const;
 
 export const fontWeights = {
@@ -64,6 +80,8 @@ export const fontWeights = {
 } as const satisfies Record<string, TextStyle['fontWeight']>;
 
 export const typography = {
+  hero: { fontSize: fontSizes.hero, lineHeight: lineHeights.hero, fontWeight: fontWeights.bold, letterSpacing: -0.3 },
+  price: { fontSize: fontSizes.price, lineHeight: lineHeights.price, fontWeight: fontWeights.bold, letterSpacing: -1 },
   display: { fontSize: fontSizes.xxl, lineHeight: lineHeights.xxl, fontWeight: fontWeights.bold },
   title: { fontSize: fontSizes.xl, lineHeight: lineHeights.xl, fontWeight: fontWeights.bold },
   heading: { fontSize: fontSizes.lg, lineHeight: lineHeights.lg, fontWeight: fontWeights.semibold },
@@ -100,6 +118,7 @@ export const radius = {
   sm: 8,
   md: 12,
   lg: 16,
+  xl: 24,
   pill: 999,
 } as const;
 
@@ -110,6 +129,8 @@ export const sizes = {
   minTouchTarget: 44,
   brandMark: 36,
   statusIcon: 64,
+  successIcon: 88,
+  radio: 22,
   maxContentWidth: 480,
   borderWidth: 1,
   borderWidthFocus: 1.5,
@@ -119,20 +140,30 @@ export const shadows = {
   card: Platform.select<ViewStyle>({
     ios: {
       shadowColor: '#0F172A',
-      shadowOpacity: 0.06,
-      shadowRadius: 12,
+      shadowOpacity: 0.08,
+      shadowRadius: 20,
+      shadowOffset: { width: 0, height: 8 },
+    },
+    android: { elevation: 4 },
+    default: { boxShadow: '0 8px 24px rgba(15, 23, 42, 0.08)' },
+  }),
+  button: Platform.select<ViewStyle>({
+    ios: {
+      shadowColor: '#1E40AF',
+      shadowOpacity: 0.25,
+      shadowRadius: 10,
       shadowOffset: { width: 0, height: 4 },
     },
-    android: { elevation: 2 },
-    default: { boxShadow: '0 4px 12px rgba(15, 23, 42, 0.06)' },
+    android: { elevation: 3 },
+    default: { boxShadow: '0 4px 12px rgba(30, 64, 175, 0.25)' },
   }),
 } as const;
 
 export const cardStyle: ViewStyle = {
   backgroundColor: colors.surface,
-  borderRadius: radius.lg,
+  borderRadius: radius.xl,
   borderWidth: sizes.borderWidth,
   borderColor: colors.border,
-  padding: spacing.xl,
+  padding: spacing.xxl,
   ...shadows.card,
 };

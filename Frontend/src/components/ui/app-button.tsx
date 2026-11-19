@@ -1,6 +1,6 @@
 import { ActivityIndicator, Pressable, StyleSheet, type PressableProps, type StyleProp, type ViewStyle } from 'react-native';
 
-import { colors, radius, sizes, spacing } from '@/theme';
+import { colors, radius, shadows, sizes, spacing } from '@/theme';
 
 import { AppText } from './app-text';
 
@@ -55,13 +55,14 @@ const styles = StyleSheet.create({
     minHeight: sizes.buttonHeight,
     paddingHorizontal: spacing.xl,
     backgroundColor: colors.primary,
+    ...shadows.button,
   },
   secondary: {
     minHeight: sizes.buttonHeight,
     paddingHorizontal: spacing.xl,
     backgroundColor: colors.surface,
     borderWidth: sizes.borderWidth,
-    borderColor: colors.borderStrong,
+    borderColor: colors.primarySoft,
   },
   link: {
     minHeight: sizes.minTouchTarget,
@@ -69,6 +70,8 @@ const styles = StyleSheet.create({
   },
   disabled: {
     opacity: 0.6,
+    boxShadow: undefined,
+    elevation: 0,
   },
   linkDisabled: {
     color: colors.textDisabled,
@@ -77,6 +80,6 @@ const styles = StyleSheet.create({
 
 const pressedStyles = StyleSheet.create({
   primary: { backgroundColor: colors.primaryPressed },
-  secondary: { backgroundColor: colors.surfaceMuted },
+  secondary: { backgroundColor: colors.infoSoft },
   link: { opacity: 0.6 },
 });
